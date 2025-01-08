@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/p2j-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/p2j-{{ version }}.tar.gz
   sha256: 6a492350953a87ceaf190b13141242f604b597efd668c2b026241c4a4f4777f5
 
 build:
@@ -14,14 +14,14 @@ build:
     - p2j=p2j.p2j:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
-    - python >=3.6
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -31,6 +31,7 @@ test:
     - p2j --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/raibosome/python2jupyter
